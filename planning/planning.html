@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning de Repas</title>
+    <link rel="stylesheet" href="icons/style.css">
+</head>
+<body>
+    <div id="meal-planner">
+        <h1>Planning de Repas</h1>
+        <div id="days">
+            <div class="day">
+                <label for="dimanche">Dimanche:</label>
+                <input type="checkbox" id="dimanche">
+            </div>
+            <div class="day">
+                <label for="lundi">Lundi:</label>
+                <input type="checkbox" id="lundi">
+            </div>
+            <div class="day">
+                <label for="mardi">Mardi:</label>
+                <input type="checkbox" id="mardi">
+            </div>
+            <div class="day">
+                <label for="mercredi">Mercredi:</label>
+                <input type="checkbox" id="mercredi">
+            </div>
+            <div class="day">
+                <label for="jeudi">Jeudi:</label>
+                <input type="checkbox" id="jeudi">
+            </div>
+            <div class="day">
+                <label for="vendredi">Vendredi:</label>
+                <input type="checkbox" id="vendredi">
+            </div>
+            <div class="day">
+                <label for="samedi">Samedi:</label>
+                <input type="checkbox" id="samedi">
+            </div>
+        </div>
+        <div id="menu">
+            <h2>Repas du jour</h2>
+            <ul id="menu-list">
+                <!-- Le contenu du menu s'affichera ici. -->
+            </ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const menuItems = {
+                "Dimanche": "Déjeuner: Riz au poulet, Salade, Dîner: Soupe de légumes, Un dessert",
+                "Lundi": "Déjeuner: Pizza, Dîner: Spaghetti",
+                "Mardi": "Déjeuner: Courgette farcie, Dîner: Gratin dauphinois",
+                "Mercredi": "Déjeuner: Grillades d'escalope, Salade césar, Dîner: Soupe de lentilles rouges",
+                "Jeudi": "Déjeuner: Riz au poulet, Dîner: Tacos",
+                "Vendredi": "Déjeuner: Couscous, Dîner: Soupe de champignons",
+                "Samedi": "Déjeuner: Gratin de légumes, Dîner: Rechta"
+            };
+
+            // Gérer les événements de cocher/décocher les jours
+            $("#days input[type='checkbox']").on("change", function() {
+                updateMenu();
+            });
+
+            // Mettre à jour le menu
+            function updateMenu() {
+                const $menu = $("#menu");
+                const $menuList = $("#menu-list");
+                $menuList.empty();
+
+                for (const day in menuItems) {
+                    if ($("#" + day.toLowerCase()).is(":checked")) {
+                        const menuText = menuItems[day];
+                        $menuList.append(`<li><strong>${day}:</strong> ${menuText}</li>`);
+                    }
+                }
+
+                if ($menuList.children().length > 0) {
+                    $menu.show();
+                } else {
+                    $menu.hide();
+                }
+            }
+        });
+        // Sélectionnez la balise h2 par son identifiant
+        const $h2 = $("#menu h2");
+
+// Mettez à jour le texte de la balise h2
+$h2.text("meal of today"); // Remplacez l'ancien titre (repas du jour) par le titre que vous souhaitez afficher
+
+    </script>
+</body>
+</html>
